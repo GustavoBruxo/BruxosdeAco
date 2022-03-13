@@ -1,0 +1,38 @@
+{% load static %}
+<header class="shadow-sm">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-auto d-flex p-3 align-items-center">
+                <!-- Logo -->
+                <a href="{% url 'index' %}" class="mb-2">
+                    <img src="{% static 'img/core-img/logo-brasao.ico' %}" width="130">
+                </a>
+                <!-- Navbar -->
+                <ul class="nav">
+                    <li><a href="{% url 'index' %}" class="nav-link p-3 text-dark">Página inicial</a></li>
+                    <li><a href="{% url 'memorial' %}" class="nav-link p-3 text-dark">Memorial</a></li>
+                    <li><a href="{% url 'integrantes' %}" class="nav-link p-3 text-dark">Integrantes</a></li>
+                    <li><a href="{% url 'albuns' %}" class="nav-link p-3 text-dark">Álbuns</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'cria_integrante' %}" class="nav-link p-3 text-dark">Incluir Integrante</a></li>
+                        <li><a href="{% url 'cria_album' %}" class="nav-link p-3 text-dark">Criar Álbum</a></li>
+                        <li><a href="{% url 'cadastro' %}" class="nav-link p-3 text-dark">Cadastro</a></li>
+                        <li><a href="{% url 'logout' %}" class="nav-link p-3 text-dark">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}" class="nav-link p-3 text-dark">Login</a></li>
+                    {% endif %}
+                </ul>
+                <!-- Ícones redes sociais -->
+                <div class="mb-md-0 top-social-info px-4">
+                    <!-- Facebook -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                       href="https://www.facebook.com/motoclubebruxos/" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                        href="#!" role="button"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

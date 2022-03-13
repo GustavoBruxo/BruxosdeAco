@@ -1,0 +1,27 @@
+{% load static %}
+    <section class="p-3">
+        <div class="container">
+            <div id="carouselExampleInterval" class="carousel slide carousel-fade shadow" data-mdb-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-mdb-interval="10000">
+                        <img src="{% static 'img/core-img/1.png' %}" class="w-100 img-fluid d-block"/>
+                    </div>
+                    {% if banner%}
+                    {% for banner in banner %}
+                        <div class="carousel-item" data-mdb-interval="10000">
+                            <img src="{{ banner.banner.url }}" class="w-100 img-fluid d-block"/>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>

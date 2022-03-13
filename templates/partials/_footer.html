@@ -1,0 +1,27 @@
+{% load static %}
+<footer class="text-center">
+    <!-- Grid container -->
+    <div class="container-fluid">
+        <!-- Section: Social media -->
+        <section class="mb-4 section-padding-20-0">
+        <!-- Facebook -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+               href="https://www.facebook.com/motoclubebruxos/" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+         <!-- Instagram -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3">
+                © 2022 Copyright:
+                <a class="text-dark" href="https://www.bruxosdeaco.com.br/">www.bruxosdeaco.com.br</a>
+            </div>
+            <!-- Footer Logo -->
+            <div class="footer-logo">
+                <a href="{% url 'index' %}"><img src="{% static 'img/core-img/logo-brasao.ico' %}"></a>
+            </div>
+        </section>
+    </div>
+</footer>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+        <!-- Receipe Slider -->
+        <div class="container mt-5 d-flex justify-content-center">
+            <div class="row">
+                <div class="col-12">
+                    <div class="receipe-slider owl-carousel">
+                        <h5 class="text-center">{{ album.nome_album }} - {{ album.local_album }}</h5>
+                        <p class="text-center">{{ album.data_album|date:"M-Y" }}</p>
+                        {% if album.foto_capa_album == '' %}
+                            <img src="{% static 'img/bg-img/engrenagem.png' %}" class="img-fluid">
+                        {% else %}
+                            <img src="{{ album.foto_capa_album.url }}" class="img-fluid shadow-2-strong img-responsive">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ##### Best Receipe Area Start ##### -->
+        <div class="container mt-5">
+            <div class="row">
+                {% if imagens %}
+                {% for img in imagens %}
+                <div class="col-lg-4 mb-3">
+                    <a href="{{ img.imagem.url }}">
+                        <img src="{{ img.imagem.url }}" class="img-fluid modallery rounded shadow-2-strong mb-3">
+                    </a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <!-- ##### Best Receipe Area End ##### -->
+{% include 'partials/_footer.html' %}
+{% endblock %}

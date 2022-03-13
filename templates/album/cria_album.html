@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="contact-area section-padding-0-80 mt-5">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="section-heading">
+                   <h3>Criar Álbum</h3>
+               </div>
+           </div>
+       </div>
+
+       <div class="row">
+           <div class="col-12">
+           <p>Todos os campos são obrigatórios</p>
+               <div class="contact-form-area">
+                   <form action="{% url 'cria_album' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       <div class="row">
+                           <div class="col-12 col-lg-12 mt-1">
+                               <label for="nome_album"><b>Nome do Álbum:</b></label>
+                               <input type="text" id="nome_album" class="form-control" name="nome_album" required>
+                           </div>
+                           <div class="col-12 mt-1">
+                               <label for="local_album"><b>Local:</b></label>
+                               <input type="text" id="local_album" class="form-control" name="local_album" required>
+                           </div>
+                           <div class="col-12 col-lg-4 mt-1">
+                               <label for="data_album"><b>Data:</b></label>
+                               <input type="date" id="data_album" class="form-control" name="data_album" required>
+                           </div>
+                           <div class="col-12 col-lg-4 mt-1">
+                               <label for="foto_capa_album"><b>Foto da capa:</b></label>
+                               <input type="file" class="form-control custom-file" name="foto_capa_album" id="foto_capa_album" required>
+                           </div>
+                           <div class="col-12 col-lg-4 mt-1">
+                               <label for="imagens"><b>Imagens:</b></label>
+                               <input type="file" class="form-control custom-file" name="imagens" id="imagens" multiple required>
+                           </div>
+                           <div class="col-12 col-lg-4 text-center mt-5">
+                               <input type="checkbox" class="form-check-input" name="exibir_album" id="exibir_album" required>
+                               <label for="exibir_album"><b>Publicar Álbum?</b></label>
+                           </div>
+                           <div class="col-12 col-lg-4 text-center mt-5">
+                               <input type="checkbox" class="form-check-input" name="album_destaque" id="album_destaque">
+                               <label for="album_destaque"><b>Álbum destaque?</b></label>
+                           </div>
+                           <div class="col-12 text-center mt-5">
+                               <button class="btn btn-success delicious-btn mt-30" type="submit">Incluir Álbum</button>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+<div class="mt-5"></div>
+{% include 'partials/_footer.html' %}
+{% endblock %}
