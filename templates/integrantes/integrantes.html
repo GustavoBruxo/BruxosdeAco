@@ -20,7 +20,13 @@
                     <p class="card-text">{{ integrante.get_cargo_integrante_display }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Integrante desde: {{ integrante.data_entrada|date:"M-Y" }}</small>
+                    <p class="text-muted">Integrante desde: {{ integrante.data_entrada|date:"M-Y" }}</p>
+                    {% if user.is_authenticated %}
+                    <p class="mt-2">
+                        <a href="{% url 'edita_integrante' integrante.id %}" type="button" class="btn btn-info">Editar</a>
+                        <a href="{% url 'deleta_integrante' integrante.id %}" type="button" class="btn btn-danger">Deletar</a>
+                    </p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -72,8 +78,7 @@
         </nav>
     </section>
 </div>
-
 <!-- ##### Pagination End ##### -->
-
+<div class="mt-5"></div>
 {% include 'partials/_footer.html' %}
 {% endblock %}

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from datetime import datetime
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Integrantes, InMemorian
 from django.core.paginator import Paginator
 
@@ -19,7 +20,7 @@ def memorial(request):
 def integrantes(request):
     """Exibe todos os integrantes do Motoclube"""
     integrantes_motoclube = Integrantes.objects.order_by('cargo_integrante')
-    paginator = Paginator(integrantes_motoclube, 6)
+    paginator = Paginator(integrantes_motoclube, 12)
     page = request.GET.get('page')
     integrantes_por_pagina = paginator.get_page(page)
 
@@ -58,3 +59,55 @@ def cria_integrante(request):
         return redirect('integrantes')
     else:
         return render(request, 'integrantes/cria_integrante.html')
+
+
+def deleta_integrante(request, id_integrante):
+    """Delete um album da base de dados"""
+    integrante = get_object_or_404(Integrantes, pk=id_integrante)
+    integrante.delete()
+    return redirect('integrantes')
+
+
+def edita_integrante(request, id_integrante):
+    """Edita o album selecionado"""
+    integrante = get_object_or_404(Integrantes, pk=id_integrante)
+
+    # Valida o cargo do integrante
+    for id_cargo, nivel in Integrantes.NIVEL:
+        if id_cargo == integrante.cargo_integrante:
+            integrante.cargo_integrante = nivel
+
+    data = integrante.data_entrada
+    integrante.data_entrada = datetime.strftime(data, '%Y-%m-%d')
+
+    dados = {
+        'integrante': integrante
+    }
+    return render(request, 'integrantes/edita_integrante.html', dados)
+
+
+def atualiza_integrante(request):
+    if request.method == 'POST':
+        id_integrante = request.POST['integrante.id']
+        a = Integrantes.objects.get(pk=id_integrante)
+        a.nome_integrante = request.POST['nome_integrante']
+        a.data_entrada = request.POST['data_entrada']
+        a.integrante_ativo = request.POST['integrante_ativo']
+        a.cargo_integrante = request.POST['cargo_integrante']
+
+        if 'foto_integrante' in request.FILES:
+            a.foto_integrante = request.FILES['foto_integrante']
+
+        # Valida integrante ativo
+        if a.integrante_ativo == 'on':
+            a.integrante_ativo = True
+        else:
+            a.integrante_ativo = False
+
+        # Valida o cargo do integrante
+        for id_cargo, nivel in Integrantes.NIVEL:
+            if nivel == a.cargo_integrante:
+                a.cargo_integrante = id_cargo
+
+        a.save()
+        return redirect('integrantes')

@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-
 class Integrantes(models.Model):
     NIVEL = (
         ('1-PRE', 'Presidente'),

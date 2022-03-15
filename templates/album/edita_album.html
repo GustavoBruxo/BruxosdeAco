@@ -21,32 +21,44 @@
                        {% csrf_token %}
                        <input type="text" id="album.id" class="form-control" name="album.id" value="{{album.id}}" hidden>
                        <div class="row">
-                           <div class="col-12 col-lg-12 mt-1">
+                           <div class="col-12 col-lg-12 mt-2">
                                <label for="nome_album"><b>Nome do Álbum:</b></label>
                                <input type="text" id="nome_album" class="form-control" name="nome_album" value="{{ album.nome_album }}" required>
                            </div>
-                           <div class="col-12 mt-1">
+                           <div class="col-12 col-lg-6 mt-2">
                                <label for="local_album"><b>Local:</b></label>
                                <input type="text" id="local_album" class="form-control" name="local_album" value="{{ album.local_album }}" required>
                            </div>
-                           <div class="col-12 col-lg-4 mt-1">
-                               <label for="data_album"><b>Data:</b></label>
+                           <div class="col-12 col-lg-6 mt-2">
+                               <label for="data_album"><b>Data de entrada:</b></label>
                                <input type="date" id="data_album" class="form-control" name="data_album" value="{{ album.data_album }}" required>
                            </div>
-                           <div class="col-12 col-lg-4 mt-1">
-                               <label for="foto_capa_album"><b>Foto da capa:</b></label>
-                               <input type="file" class="form-control custom-file" name="foto_capa_album" id="foto_capa_album" value="{{ album.foto_capa_album.url }}" required>
-                           </div>
-                           <div class="col-12 col-lg-4 text-center mt-5">
-                               <input type="checkbox" class="form-check-input" name="exibir_album" id="exibir_album" value="{{ album.exibir_album }}" required>
+                           <div class="col-12 col-lg-6 text-center mt-5">
+                               {% if album.exibir_album == True %}
+                               <input type="checkbox" class="form-check-input" name="exibir_album" id="exibir_album" checked required>
+                               {% else %}
+                               <input type="checkbox" class="form-check-input" name="exibir_album" id="exibir_album" required>
+                               {% endif %}
                                <label for="exibir_album"><b>Publicar Álbum?</b></label>
                            </div>
-                           <div class="col-12 col-lg-4 text-center mt-5">
-                               <input type="checkbox" class="form-check-input" name="album_destaque" id="album_destaque" value="{{ album.album_destaque }}">
+                           <div class="col-12 col-lg-6 text-center mt-5">
+                               {% if album.album_destaque == True %}
+                               <input type="checkbox" class="form-check-input" name="album_destaque" id="album_destaque" checked>
+                               {% else %}
+                               <input type="checkbox" class="form-check-input" name="album_destaque" id="album_destaque">
+                               {% endif %}
                                <label for="album_destaque"><b>Álbum destaque?</b></label>
                            </div>
+                           <div class="col-12 col-lg-6 mt-4">
+                               <label for="foto_capa_album"><b>Foto da capa:</b></label>
+                               <img class="rounded mx-auto d-block" src="{{ album.foto_capa_album.url }}" height="175">
+                           </div>
+                           <div class="col-12 col-lg-6 mt-4">
+                               <label for="foto_capa_album"><b>Adicionar nova foto de capa:</b></label>
+                               <input type="file" class="form-control custom-file" name="foto_capa_album" id="foto_capa_album">
+                           </div>
                            <div class="col-12 text-center mt-5">
-                               <button class="btn btn-success delicious-btn mt-30" type="submit">Atualizar</button>
+                               <button class="btn btn-success delicious-btn mt-3" type="submit">Atualizar Álbum</button>
                            </div>
                        </div>
                    </form>

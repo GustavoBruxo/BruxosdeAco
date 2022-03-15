@@ -22,9 +22,9 @@
                     <p class="card-text">{{ album.local_album }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Data: {{ album.data_album|date:"M-Y" }}</small>
+                    <p class="text-muted">Data: {{ album.data_album|date:"M-Y" }}</p>
                     {% if user.is_authenticated %}
-                    <p>
+                    <p class="mt-2">
                         <a href="{% url 'edita_album' album.id %}" type="button" class="btn btn-info">Editar</a>
                         <a href="{% url 'deleta_album' album.id %}" type="button" class="btn btn-danger">Deletar</a>
                     </p>
@@ -80,8 +80,7 @@
         </nav>
     </section>
 </div>
-
 <!-- ##### Pagination End ##### -->
-
+<div class="mt-5"></div>
 {% include 'partials/_footer.html' %}
 {% endblock %}

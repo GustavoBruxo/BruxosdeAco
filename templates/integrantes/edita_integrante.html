@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="contact-area section-padding-0-80 mt-5">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="section-heading">
+                   <h3>Editar integrante</h3>
+               </div>
+           </div>
+       </div>
+
+       <div class="row">
+           <div class="col-12">
+           <p>Todos os campos são obrigatórios</p>
+               <div class="contact-form-area">
+                   <form action="{% url 'atualiza_integrante' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       <input type="text" id="integrante.id" class="form-control" name="integrante.id" value="{{integrante.id}}" hidden>
+                       <div class="row">
+                           <div class="col-12 col-lg-12 mt-4">
+                               <label for="nome_integrante"><b>Nome do integrante:</b></label>
+                               <input type="text" id="nome_integrante" class="form-control" name="nome_integrante" value="{{ integrante.nome_integrante }}" required>
+                           </div>
+                           <div class="col-12 col-lg-6 mt-4">
+                               <label for="cargo_integrante"><b>Cargo do integrante:</b></label>
+                               <select class="form-control" id="cargo_integrante" name="cargo_integrante">
+                                   <option selected>{{ integrante.cargo_integrante }}</option>
+                                   <option>Presidente</option>
+                                   <option>Vice-Presidente</option>
+                                   <option>Diretor</option>
+                                   <option>Integrante</option>
+                                   <option>Prospero</option>
+                                   <option>Espelho</option>
+                               </select>
+                           </div>
+                           <div class="col-12 col-lg-6 mt-4">
+                               <label for="data_entrada"><b>Data de entrada:</b></label>
+                               <input type="date" id="data_entrada" class="form-control" name="data_entrada" value="{{ integrante.data_entrada }}" required>
+                           </div>
+                           <div class="col-12 col-lg-4 mt-4">
+                               <label for="foto_integrante"><b>Foto do integrante:</b></label>
+                               <img class="rounded mx-auto d-block" src="{{ integrante.foto_integrante.url }}" height="300">
+                           </div>
+                           <div class="col-12 col-lg-4 mt-4">
+                               <label for="foto_integrante"><b>Adicionar nova foto:</b></label>
+                               <input type="file" class="form-control custom-file" name="foto_integrante" id="foto_integrante">
+                           </div>
+                           <div class="col-12 col-lg-4 text-center mt-5">
+                               {% if integrante.integrante_ativo == True %}
+                               <input type="checkbox" class="form-check-input" name="integrante_ativo" id="integrante_ativo" checked required>
+                               {% else %}
+                               <input type="checkbox" class="form-check-input" name="integrante_ativo" id="integrante_ativo" required>
+                               {% endif %}
+                               <label for="integrante_ativo"><b>Integrante ativo</b></label>
+                           </div>
+                           <div class="col-12 text-center mt-5">
+                               <button class="btn btn-success delicious-btn mt-30" type="submit">Atualizar Integrante</button>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+<div class="mt-5"></div>
+{% include 'partials/_footer.html' %}
+{% endblock %}

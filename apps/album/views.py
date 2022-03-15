@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Album, Imagens
 from django.core.paginator import Paginator
@@ -68,8 +70,14 @@ def deleta_album(request, id_album):
 def edita_album(request, id_album):
     """Edita o album selecionado"""
     album = get_object_or_404(Album, pk=id_album)
+    imagens = Imagens.objects.get_queryset().filter(id_album=album)
+
+    data = album.data_album
+    album.data_album = datetime.strftime(data, '%Y-%m-%d')
+
     dados = {
-        'album': album
+        'album': album,
+        'imagens': imagens
     }
     return render(request, 'album/edita_album.html', dados)
 
@@ -82,7 +90,20 @@ def atualiza_album(request):
         a.local_album = request.POST['local_album']
         a.data_album = request.POST['data_album']
         a.exibir_album = request.POST['exibir_album']
+        a.album_destaque = request.POST['album_destaque']
+
         if 'foto_capa_album' in request.FILES:
             a.foto_capa_album = request.FILES['foto_capa_album']
+        imagens = request.FILES.getlist('imagens')
+
+        if a.exibir_album == 'on':
+            a.exibir_album = True
+
+        if a.album_destaque == 'on':
+            a.album_destaque = True
+
+        for img in imagens:
+            imagem = Imagens.objects.create(imagem=img, id_album=id_album)
+            imagem.save()
         a.save()
         return redirect('albuns')

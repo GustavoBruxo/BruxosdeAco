@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="text-center mt-5">
+    <h5>Opções</h5>
+</div>
+
+<!-- ##### Best Receipe Area Start ##### -->
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="row">
+        <div class="card-columns">
+            <div class="card shadow" style="width: 22rem;">
+                <img class="card-img-top" src="{% static 'img/core-img/logo-brasao.ico' %}">
+                <div class="card-body">
+                    <a href="{% url 'cria_integrante' %}" class="text-dark">
+                        <h5 class="card-title">Incluir Integrantes</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="card shadow" style="width: 22rem;">
+                <img class="card-img-top" src="{% static 'img/core-img/logo-brasao.ico' %}">
+                <div class="card-body">
+                    <a href="{% url 'cria_album' %}" class="text-dark">
+                        <h5 class="card-title">Incluir Álbum</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="card shadow" style="width: 22rem;">
+                <img class="card-img-top" src="{% static 'img/core-img/logo-brasao.ico' %}">
+                <div class="card-body">
+                    <a href="{% url 'cadastro' %}" class="text-dark">
+                        <h5 class="card-title">Cadastrar usuário</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Best Receipe Area End ##### -->
+
+{% include 'partials/_footer.html' %}
+{% endblock %}

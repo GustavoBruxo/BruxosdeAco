@@ -16,3 +16,7 @@ def index(request):
         'albuns': albuns_por_pagina
     }
     return render(request, 'bruxodeaco/index.html', dados)
+
+
+def cadastros(request):
+    return render(request, 'bruxodeaco/cadastros.html')
