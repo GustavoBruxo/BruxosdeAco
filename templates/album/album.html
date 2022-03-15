@@ -21,19 +21,21 @@
         </div>
 
         <!-- ##### Best Receipe Area Start ##### -->
-        <div class="container mt-5">
+        <div class="container mt-5 d-flex justify-content-center">
             <div class="row">
+                <div class="card-columns">
                 {% if imagens %}
                 {% for img in imagens %}
-                <div class="col-lg-4 mb-3">
+                <div class="card shadow" style="width: 22rem;">
                     <a href="{{ img.imagem.url }}">
-                        <img src="{{ img.imagem.url }}" class="img-fluid modallery rounded shadow-2-strong mb-3">
+                        <img src="{{ img.imagem.url }}" class="card-img-top img-fluid">
                     </a>
                 </div>
                 {% endfor %}
                 {% endif %}
+                </div>
             </div>
         </div>
-        <!-- ##### Best Receipe Area End ##### -->
+
 {% include 'partials/_footer.html' %}
 {% endblock %}
